@@ -13,6 +13,11 @@ import Inspect from 'vite-plugin-inspect'
 import LinkAttributes from 'markdown-it-link-attributes'
 import Unocss from 'unocss/vite'
 import Shiki from 'markdown-it-shiki'
+import {
+  AntDesignVueResolver,
+  ElementPlusResolver,
+  VantResolver,
+} from 'unplugin-vue-components/resolvers'
 
 export default defineConfig({
   resolve: {
@@ -60,6 +65,15 @@ export default defineConfig({
       // allow auto import and register components used in markdown
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
       dts: 'src/components.d.ts',
+      resolvers: [
+        AntDesignVueResolver({
+          cjs: true,
+          resolveIcons: true,
+          importCss: true,
+        }),
+        ElementPlusResolver(),
+        VantResolver(),
+      ],
     }),
 
     // https://github.com/antfu/unocss
@@ -143,11 +157,12 @@ export default defineConfig({
   ssgOptions: {
     script: 'async',
     formatting: 'minify',
+    format: 'cjs',
     onFinished() { generateSitemap() },
   },
 
   ssr: {
     // TODO: workaround until they support native ESM
-    noExternal: ['workbox-window', /vue-i18n/],
+    noExternal: ['workbox-window', 'ant-design-vue', '@babel', /vue-i18n/],
   },
 })

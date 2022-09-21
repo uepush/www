@@ -16,6 +16,7 @@ const { t } = useI18n()
     <div text-4xl>
       <div i-carbon-campsite inline-block />
     </div>
+    <a-spin />
     <p>
       <a rel="noreferrer" href="https://github.com/antfu/vitesse" target="_blank">
         Vitesse
