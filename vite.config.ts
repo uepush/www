@@ -163,6 +163,6 @@ export default defineConfig({
 
   ssr: {
     // TODO: workaround until they support native ESM
-    noExternal: ['workbox-window', 'ant-design-vue', '@babel', /vue-i18n/],
+    noExternal: ['workbox-window', 'ant-design-vue', /vue-i18n/],
   },
 })
